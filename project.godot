@@ -11,6 +11,14 @@ config_version=5
 [application]
 
 config/name="Lab02Colors"
-run/main_scene="res://Scenes/main_window.tscn"
+run/main_scene="res://main.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/subwindows/embed_subwindows=false
+
+[rendering]
+
+environment/defaults/default_clear_color=Color(0.219608, 0.294118, 0.439216, 1)

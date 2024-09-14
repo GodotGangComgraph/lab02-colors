@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://vs7sbb4j4bpq"]
+
+[ext_resource type="Script" path="res://load_image.gd" id="1_l8ks6"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l8ks6")
+
+[node name="Image" type="Window" parent="."]
+mode = 2
+initial_position = 2
+size = Vector2i(300, 300)
+visible = false
+always_on_top = true
+
+[node name="TextureRect" type="TextureRect" parent="Image"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(400, 500)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+root_subfolder = "C:/"
+filters = PackedStringArray("*.jpg", "*.jpeg", "*.png", "*.bmp")
+use_native_dialog = true
+
+[node name="Load" type="Button" parent="."]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 69.0
+offset_right = 384.0
+offset_bottom = 199.0
+theme_override_font_sizes/font_size = 25
+text = "CLICK TO LOAD AN IMAGE"
+
+[node name="Label" type="Label" parent="Load"]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 46.0
+offset_right = 848.0
+offset_bottom = 73.0
+
+[node name="Grayscale" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 239.0
+offset_right = 385.0
+offset_bottom = 289.0
+text = "GRAYSCALE"
+
+[node name="ExtractRGB" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 320.0
+offset_right = 385.0
+offset_bottom = 370.0
+text = "EXTRACT R, G, B"
+
+[node name="ConvertToHSV" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 399.0
+offset_right = 385.0
+offset_bottom = 449.0
+text = "CONVERT TO HSV"
+
+[connection signal="close_requested" from="Image" to="." method="_on_image_close_requested"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="Load" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Load" to="Load" method="_on_pressed"]
+[connection signal="pressed" from="Grayscale" to="." method="_on_grayscale_pressed"]
+[connection signal="pressed" from="ExtractRGB" to="." method="_on_extract_rgb_pressed"]
+[connection signal="pressed" from="ConvertToHSV" to="." method="_on_convert_to_hsv_pressed"]
