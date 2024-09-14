@@ -23,23 +23,33 @@ func _on_grayscale_item_selected(index: int) -> void:
 	if index == 0:
 		texture_rect.texture = texture_copy
 	else:
-		texture_rect.texture = to_gray_scale(index % 2 != 0)
+		texture_rect.texture = to_gray_scale(index)
 
 
-func to_gray_scale(is_option_one):
+func to_gray_scale(index):
 	var image = texture_copy.get_image()
-
+	
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
+			
 			var brightness
 			
-			if is_option_one:
+			if index == 1:
 				brightness = 0.299*current_pixel.r + 0.587*current_pixel.g + 0.114*current_pixel.b
-			else:
+			elif index == 2:
 				brightness = 0.2126*current_pixel.r + 0.7152*current_pixel.g + 0.0722*current_pixel.b
+			elif index == 3:
+				var brightness1 = 0.299*current_pixel.r + 0.587*current_pixel.g + 0.114*current_pixel.b
+				var brightness2 = 0.2126*current_pixel.r + 0.7152*current_pixel.g + 0.0722*current_pixel.b
+				brightness = brightness1 - brightness2
+			else:
+				var brightness1 = 0.299*current_pixel.r + 0.587*current_pixel.g + 0.114*current_pixel.b
+				var brightness2 = 0.2126*current_pixel.r + 0.7152*current_pixel.g + 0.0722*current_pixel.b
+				brightness = brightness2 - brightness1
 			
 			current_pixel = Color(brightness, brightness, brightness, current_pixel.a)
+			
 			image.set_pixel(x, y, current_pixel)
 	
 	return ImageTexture.create_from_image(image)

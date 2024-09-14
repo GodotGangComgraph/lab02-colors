@@ -58,12 +58,17 @@ offset_left = 50.0
 offset_top = 239.0
 offset_right = 385.0
 offset_bottom = 289.0
-item_count = 3
+selected = 0
+item_count = 5
 popup/item_0/text = "Off"
 popup/item_1/text = "Grayscale 1"
 popup/item_1/id = 1
 popup/item_2/text = "Grayscale 2"
 popup/item_2/id = 2
+popup/item_3/text = "Grayscale 3"
+popup/item_3/id = 3
+popup/item_4/text = "Grayscale 4"
+popup/item_4/id = 4
 script = SubResource("GDScript_vip8t")
 
 [node name="ExtractRGB" type="Button" parent="."]
