@@ -27,7 +27,7 @@ func _on_grayscale_item_selected(index: int) -> void:
 
 
 func to_gray_scale(is_option_one):
-	var image = texture_rect.texture.get_image()
+	var image = texture_copy.get_image()
 
 	for y in image.get_size().y:
 		for x in image.get_size().x:
