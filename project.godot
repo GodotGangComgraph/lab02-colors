@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 window/subwindows/embed_subwindows=false
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/easy_charts/plugin.cfg")
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.219608, 0.294118, 0.439216, 1)
