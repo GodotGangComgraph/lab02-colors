@@ -21,9 +21,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 530.0
+offset_top = 40.0
+offset_right = -46.0
+offset_bottom = -415.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+stretch_mode = 5
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a File"
@@ -71,14 +76,6 @@ popup/item_4/text = "Grayscale 4"
 popup/item_4/id = 4
 script = SubResource("GDScript_vip8t")
 
-[node name="ExtractRGB" type="Button" parent="."]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 320.0
-offset_right = 385.0
-offset_bottom = 370.0
-text = "EXTRACT R, G, B"
-
 [node name="ConvertToHSV" type="Button" parent="."]
 layout_mode = 0
 offset_left = 50.0
@@ -87,9 +84,58 @@ offset_right = 385.0
 offset_bottom = 449.0
 text = "CONVERT TO HSV"
 
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 297.0
+offset_right = 92.0
+offset_bottom = 337.0
+
+[node name="Red" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="EnableRed" type="CheckBox" parent="VBox/Red"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="VBox/Red"]
+layout_mode = 2
+text = "Red"
+
+[node name="Green" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="EnableGreen" type="CheckBox" parent="VBox/Green"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="VBox/Green"]
+layout_mode = 2
+text = "Green"
+
+[node name="Blue" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="EnableBlue" type="CheckBox" parent="VBox/Blue"]
+layout_mode = 2
+button_pressed = true
+
+[node name="Label" type="Label" parent="VBox/Blue"]
+layout_mode = 2
+text = "Blue"
+
+[node name="VChart" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 515.0
+offset_top = 320.0
+offset_right = 1275.0
+offset_bottom = 714.0
+
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="Load" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Load" to="Load" method="_on_pressed"]
 [connection signal="item_selected" from="Grayscale" to="." method="_on_grayscale_item_selected"]
-[connection signal="pressed" from="ExtractRGB" to="." method="_on_extract_rgb_pressed"]
 [connection signal="pressed" from="ConvertToHSV" to="." method="_on_convert_to_hsv_pressed"]
+[connection signal="toggled" from="VBox/Red/EnableRed" to="." method="_on_enable_red_toggled"]
+[connection signal="toggled" from="VBox/Green/EnableGreen" to="." method="_on_enable_green_toggled"]
+[connection signal="toggled" from="VBox/Blue/EnableBlue" to="." method="_on_enable_blue_toggled"]
