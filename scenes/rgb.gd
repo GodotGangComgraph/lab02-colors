@@ -1,6 +1,6 @@
 extends Control
 
-@onready var image: Image = Image.load_from_file("res://ФРУКТЫ.jpg")
+@onready var image: Image = Image.load_from_file(ImagePath.image_path)
 
 @onready var texture_rect: TextureRect = $VBoxContainer/HBoxContainer/TextureRect
 
@@ -126,3 +126,9 @@ func enable_red():
 			current_pixel = Color(original_pixel.r, current_pixel.g, current_pixel.b, current_pixel.a)
 			image.set_pixel(x, y, current_pixel)
 	return ImageTexture.create_from_image(image)
+
+
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

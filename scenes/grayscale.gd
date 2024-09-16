@@ -1,11 +1,11 @@
 extends Control
 
-@onready var image: Image = Image.load_from_file("res://ФРУКТЫ.jpg")
+var image: Image = Image.load_from_file(ImagePath.image_path)
 
-@onready var texture_rect_1: TextureRect = $GridContainer/TextureRect
-@onready var texture_rect_2: TextureRect = $GridContainer/TextureRect2
-@onready var texture_rect_3: TextureRect = $GridContainer/TextureRect3
-@onready var texture_rect_4: TextureRect = $GridContainer/TextureRect4
+@onready var texture_rect_1: TextureRect = $VBoxContainer/GridContainer/TextureRect
+@onready var texture_rect_2: TextureRect = $VBoxContainer/GridContainer/TextureRect2
+@onready var texture_rect_3: TextureRect = $VBoxContainer/GridContainer/TextureRect3
+@onready var texture_rect_4: TextureRect = $VBoxContainer/GridContainer/TextureRect4
 
 @onready var chart_scn: PackedScene = load("res://addons/easy_charts/control_charts/chart.tscn")
 var chart: Chart
@@ -63,7 +63,7 @@ func draw_hist(index):
 		image = texture_rect_3.texture.get_image()
 	
 	chart = chart_scn.instantiate()
-	$GridContainer.add_child(chart)
+	$VBoxContainer/GridContainer.add_child(chart)
 	
 	var val: Array = range(256)
 	
@@ -81,4 +81,7 @@ func draw_hist(index):
 	var f1_3 = Function.new(val.slice(200, 256), freq_red.slice(200, 256), "Brightness", { marker = Function.Marker.CIRCLE, type = Function.Type.LINE, color = Color("#000000") })
 
 	chart.plot([f1_1, f1_2, f1_3])
-	
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/menu.tscn")

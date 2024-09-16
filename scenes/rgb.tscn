@@ -58,6 +58,15 @@ size_flags_vertical = 3
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Button" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(400, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "EXIT TO MENU"
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="toggled" from="VBoxContainer/VBox/EnableRed" to="." method="_on_enable_red_toggled"]
 [connection signal="toggled" from="VBoxContainer/VBox/EnableGreen" to="." method="_on_enable_green_toggled"]
 [connection signal="toggled" from="VBoxContainer/VBox/EnableBlue" to="." method="_on_enable_blue_toggled"]
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]

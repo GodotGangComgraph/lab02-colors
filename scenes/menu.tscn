@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7m0c4ojfcouf"]
+
+[ext_resource type="Script" path="res://scenes/menu.gd" id="1_53tqd"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_53tqd")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="LoadImage" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+text = "LOAD IMAGE"
+
+[node name="OpenGrayscale" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "GRAYSCALE THE IMAGE"
+
+[node name="OpenRGB" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "EXTRACT RGB"
+
+[node name="OpenHSV" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 40
+disabled = true
+text = "CONVERT TO HSV"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.jpg", "*.png", "*.jpeg")
+use_native_dialog = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/LoadImage" to="." method="_on_load_image_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OpenGrayscale" to="." method="_on_open_grayscale_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OpenRGB" to="." method="_on_open_rgb_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/OpenHSV" to="." method="_on_open_hsv_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://4xo23efjf43u"]
+[gd_scene load_steps=3 format=3 uid="uid://505bjn04dgk8"]
 
 [ext_resource type="Script" path="res://scenes/hsv.gd" id="1_bdx8q"]
 [ext_resource type="Texture2D" uid="uid://dmdi0lue6ou1t" path="res://ФРУКТЫ.jpg" id="1_fraod"]
@@ -47,7 +47,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 max_value = 360.0
-value = 180.0
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -59,9 +58,9 @@ text = "S"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+min_value = -1.0
 max_value = 1.0
 step = 0.01
-value = 0.5
 
 [node name="Label3" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -73,17 +72,45 @@ text = "V"
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
+min_value = -1.0
 max_value = 1.0
 step = 0.01
-value = 0.5
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("1_fraod")
 expand_mode = 1
 stretch_mode = 5
 
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+text = "SAVE TO FILE"
+
+[node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(400, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "EXIT TO MENU"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+access = 2
+filters = PackedStringArray("*.jpg")
+use_native_dialog = true
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/HSlider" to="." method="_on_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/SSlider" to="." method="_on_slider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/VSlider" to="." method="_on_slider_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
