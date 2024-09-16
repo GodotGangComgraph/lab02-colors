@@ -32,4 +32,6 @@ enabled=PackedStringArray("res://addons/easy_charts/plugin.cfg")
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.219608, 0.294118, 0.439216, 1)
