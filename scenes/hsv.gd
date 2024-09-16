@@ -9,6 +9,7 @@ extends Control
 @onready var image: Image = Image.load_from_file(ImagePath.image_path)
 var texture: ImageTexture
 
+
 func _ready() -> void:
 	texture = ImageTexture.create_from_image(image)
 	
@@ -17,8 +18,9 @@ func _ready() -> void:
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
-			var c = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
-			image.set_pixel(x, y, Color.from_hsv(c[0]/360.0, c[1], c[2]))
+			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
+			var rgb = hsv_to_rgb(hsv[0]/360.0, hsv[1], hsv[2])
+			image.set_pixel(x, y, Color(rgb[0], rgb[1], rgb[2]))
 	
 	texture_rect.texture = ImageTexture.create_from_image(image)
 
@@ -51,6 +53,53 @@ func rgb_to_hsv(r, g, b):
 	return [h, s, v]
 
 
+func hsv_to_rgb(p_h, p_s, p_v):
+	var i: int = 0
+	var f; var p; var q; var t
+	
+	var r; var g; var b
+	
+	if (p_s == 0.0):
+		return [p_v, p_v, p_v]
+	
+	p_h *= 6.0
+	p_h = fmod(p_h, 6.0)
+	i = floor(p_h)
+	
+	f = p_h - i
+	p = p_v * (1.0 - p_s)
+	q = p_v * (1.0 - p_s * f)
+	t = p_v * (1.0 - p_s * (1.0 - f))
+
+	match(i):
+		0:
+			r = p_v
+			g = t
+			b = p
+		1:
+			r = q
+			g = p_v
+			b = p
+		2:
+			r = p
+			g = p_v
+			b = t
+		3:
+			r = p
+			g = q
+			b = p_v
+		4:
+			r = t
+			g = p
+			b = p_v
+		_:
+			r = p_v
+			g = p
+			b = q
+	
+	return [r, g, b]
+
+
 func _on_slider_value_changed(value: float) -> void:
 	var h = h_slider.value
 	var s = s_slider.value
@@ -60,8 +109,9 @@ func _on_slider_value_changed(value: float) -> void:
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = old_image.get_pixel(x, y)
-			var c = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
-			image.set_pixel(x, y, Color.from_hsv(fmod(c[0] + h, 360) / 360.0, c[1] + s, c[2] + v))
+			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
+			var rgb = hsv_to_rgb(fmod(hsv[0] + h, 360) / 360.0, hsv[1] + s, hsv[2] + v)
+			image.set_pixel(x, y, Color(rgb[0], rgb[1], rgb[2]))
 	
 	texture_rect.texture = ImageTexture.create_from_image(image)
 
