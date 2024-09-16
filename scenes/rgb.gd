@@ -19,7 +19,6 @@ func _ready() -> void:
 
 
 func draw_hists():
-	var image = texture.get_image()
 	chart = chart_scn.instantiate()
 	$VBoxContainer/HBoxContainer.add_child(chart)
 	
@@ -74,7 +73,6 @@ func _on_enable_red_toggled(toggled_on: bool) -> void:
 		texture_rect.texture = enable_red()
 
 func disable_blue():
-	var image = texture_rect.texture.get_image()
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
@@ -83,7 +81,6 @@ func disable_blue():
 	return ImageTexture.create_from_image(image)
 
 func enable_blue():
-	var image = texture_rect.texture.get_image()
 	var original_image = texture.get_image()
 	for y in image.get_size().y:
 		for x in image.get_size().x:
@@ -94,7 +91,6 @@ func enable_blue():
 	return ImageTexture.create_from_image(image)
 
 func disable_green():
-	var image = texture_rect.texture.get_image()
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
@@ -103,7 +99,6 @@ func disable_green():
 	return ImageTexture.create_from_image(image)
 
 func enable_green():
-	var image = texture_rect.texture.get_image()
 	var original_image = texture.get_image()
 	for y in image.get_size().y:
 		for x in image.get_size().x:
@@ -114,7 +109,6 @@ func enable_green():
 	return ImageTexture.create_from_image(image)
 
 func disable_red():
-	var image = texture_rect.texture.get_image()
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
@@ -123,7 +117,6 @@ func disable_red():
 	return ImageTexture.create_from_image(image)
 
 func enable_red():
-	var image = texture_rect.texture.get_image()
 	var original_image = texture.get_image()
 	
 	for y in image.get_size().y:

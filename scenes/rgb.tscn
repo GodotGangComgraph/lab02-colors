@@ -55,6 +55,8 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 5
 
 [connection signal="toggled" from="VBoxContainer/VBox/EnableRed" to="." method="_on_enable_red_toggled"]
 [connection signal="toggled" from="VBoxContainer/VBox/EnableGreen" to="." method="_on_enable_green_toggled"]
