@@ -28,7 +28,7 @@ func draw_hists():
 	var freq_green: Array = [] ; freq_green.resize(256) ; freq_green.fill(0)
 	var freq_blue: Array = [] ; freq_blue.resize(256) ; freq_blue.fill(0)
 	
-
+	
 	for y in image.get_size().y:
 		for x in image.get_size().x:
 			var current_pixel = image.get_pixel(x, y)
