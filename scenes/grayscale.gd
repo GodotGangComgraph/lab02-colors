@@ -41,16 +41,10 @@ func to_gray_scale(index):
 			elif index == 3:
 				var brightness1 = 0.299*current_pixel.r + 0.587*current_pixel.g + 0.114*current_pixel.b
 				var brightness2 = 0.2126*current_pixel.r + 0.7152*current_pixel.g + 0.0722*current_pixel.b
-				brightness = brightness1 - brightness2
-			else:
-				var brightness1 = 0.299*current_pixel.r + 0.587*current_pixel.g + 0.114*current_pixel.b
-				var brightness2 = 0.2126*current_pixel.r + 0.7152*current_pixel.g + 0.0722*current_pixel.b
-				brightness = brightness2 - brightness1
-			
+				brightness = abs(brightness1 - brightness2) * 2.5
 			current_pixel = Color(brightness, brightness, brightness, current_pixel.a)
 			
 			image.set_pixel(x, y, current_pixel)
-			
 	return ImageTexture.create_from_image(image)
 	
 
