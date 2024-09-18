@@ -12,17 +12,7 @@ var texture: ImageTexture
 
 func _ready() -> void:
 	texture = ImageTexture.create_from_image(image)
-	
 	texture_rect.texture = texture
-	
-	for y in image.get_size().y:
-		for x in image.get_size().x:
-			var current_pixel = image.get_pixel(x, y)
-			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
-			var rgb = hsv_to_rgb(hsv[0]/360.0, hsv[1], hsv[2])
-			image.set_pixel(x, y, Color(rgb[0], rgb[1], rgb[2]))
-	
-	texture_rect.texture = ImageTexture.create_from_image(image)
 
 
 func rgb_to_hsv(r, g, b):
@@ -54,7 +44,7 @@ func rgb_to_hsv(r, g, b):
 
 
 func hsv_to_rgb(p_h, p_s, p_v):
-	var i: int = 0
+	var i: int
 	var f; var p; var q; var t
 	
 	var r; var g; var b
@@ -62,7 +52,7 @@ func hsv_to_rgb(p_h, p_s, p_v):
 	if (p_s == 0.0):
 		return [p_v, p_v, p_v]
 	
-	p_h *= 6.0
+	p_h /= 60.0
 	p_h = fmod(p_h, 6.0)
 	i = floor(p_h)
 	
@@ -110,7 +100,7 @@ func _on_slider_value_changed(value: float) -> void:
 		for x in image.get_size().x:
 			var current_pixel = old_image.get_pixel(x, y)
 			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
-			var rgb = hsv_to_rgb(fmod(hsv[0] + h, 360) / 360.0, hsv[1] + s, hsv[2] + v)
+			var rgb = hsv_to_rgb(fmod(hsv[0] + h, 360), hsv[1] + s, hsv[2] + v)
 			image.set_pixel(x, y, Color(rgb[0], rgb[1], rgb[2]))
 	
 	texture_rect.texture = ImageTexture.create_from_image(image)
