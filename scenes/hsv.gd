@@ -9,10 +9,27 @@ extends Control
 @onready var image: Image = Image.load_from_file(ImagePath.image_path)
 var texture: ImageTexture
 
+var image_map = []
 
 func _ready() -> void:
 	texture = ImageTexture.create_from_image(image)
 	texture_rect.texture = texture
+	
+	var old_image = texture.get_image()
+	
+	for x in range(image.get_size().x):
+		image_map.append([])
+		image_map[x]=[]
+		for y in range(image.get_size().y):
+			image_map[x].append([])
+			image_map[x][y]=0
+
+	for y in image.get_size().y:
+		for x in image.get_size().x:
+			var current_pixel = old_image.get_pixel(x, y)
+			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
+			
+			image_map[x][y] = hsv
 
 
 func rgb_to_hsv(r, g, b):
@@ -101,8 +118,7 @@ func _on_slider_drag_ended(value_changed: bool) -> void:
 	
 	for y in image.get_size().y:
 		for x in image.get_size().x:
-			var current_pixel = old_image.get_pixel(x, y)
-			var hsv = rgb_to_hsv(current_pixel.r, current_pixel.g, current_pixel.b)
+			var hsv = image_map[x][y]
 			var rgb = hsv_to_rgb(fmod(hsv[0] + h, 360), hsv[1] + s, hsv[2] + v)
 			image.set_pixel(x, y, Color(rgb[0], rgb[1], rgb[2]))
 	
