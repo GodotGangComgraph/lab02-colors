@@ -108,9 +108,9 @@ access = 2
 filters = PackedStringArray("*.jpg")
 use_native_dialog = true
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/HSlider" to="." method="_on_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/SSlider" to="." method="_on_slider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/VSlider" to="." method="_on_slider_value_changed"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/HSlider" to="." method="_on_slider_drag_ended"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/SSlider" to="." method="_on_slider_drag_ended"]
+[connection signal="drag_ended" from="MarginContainer/VBoxContainer/VBoxContainer/GridContainer/VSlider" to="." method="_on_slider_drag_ended"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

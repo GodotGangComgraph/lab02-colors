@@ -90,7 +90,10 @@ func hsv_to_rgb(p_h, p_s, p_v):
 	return [r, g, b]
 
 
-func _on_slider_value_changed(value: float) -> void:
+func _on_slider_drag_ended(value_changed: bool) -> void:
+	if !value_changed:
+		return
+	
 	var h = h_slider.value
 	var s = s_slider.value
 	var v = v_slider.value
